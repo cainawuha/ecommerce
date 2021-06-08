@@ -1,0 +1,29 @@
+<div th:fragment="html">
+    <div class="homepageCategoryProducts">
+        <div class="eachHomepageCategoryProducts" v-for="c in categories">
+            <div class="categoryTitle" style="padding-left: 10px;border-left: 7px solid #19C8A9;">{{c.name}}</div>
+            <br>
+            <div v-for="child in c.children" style="display: flex">
+                <div class="categoryTitle" style="margin-top: 8px; font-size: 14px; width: 14px">{{child.name}}</div>
+                <div class="productItem"  v-for="p,index in child.productsByRow[0]" v-if="index<5" >
+                    <a :href="'product?pid='+p.id">
+                        <img width="100px" :src="'img/productSingle_middle/'+p.firstProductImage.id+'.jpg'">
+                    </a>
+                    <a class="productItemDescLink" href="'product?pid='+p.id">
+                    <span class="productItemDesc">[热销]
+                    {{p.name | subStringFilter(0,20)}}
+                    </span>
+                    </a>
+                    <span class="productPrice">
+                    {{p.promotePrice | formatMoneyFilter}}
+                </span>
+                </div>
+            </div>
+
+            <div style="clear:both"></div>
+
+    </div>
+        <img id="endpng" class="endpng" src="img/site/end.png">
+
+    </div>
+</div>

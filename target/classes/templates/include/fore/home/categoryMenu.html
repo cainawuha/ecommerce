@@ -1,0 +1,63 @@
+
+<div th:fragment="html">
+	<div class="categoryMenu">
+		<div :cid="c.id" class="eachCategory" v-for="c in categories"  >
+			<span class="glyphicon glyphicon-link"></span>
+			<a :href="'category?cid='+c.id">
+				{{c.name}}
+			</a>
+<!--			<div v-for="c1 in c.children">-->
+<!--				{{ c1.name }}-->
+<!--			</div>-->
+		</div>
+	</div>
+</div>
+
+
+<!--<div id="workingArea">-->
+
+<!--    <cpn v-bind:navMenus="categories"></cpn>-->
+<!--</div>-->
+
+<!--<template>-->
+<!--    <div th:fragment="html">-->
+<!--        <div class="categoryMenu">-->
+<!--&lt;!&ndash;            <label v-for="navMenu in navMenus">                &lt;!&ndash;只有一级菜单&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <el-menu-item v-if="!navMenu.children"&ndash;&gt;-->
+<!--&lt;!&ndash;                              :index="navMenu.key"&ndash;&gt;-->
+<!--&lt;!&ndash;                              :route="navMenu.key"&ndash;&gt;-->
+<!--&lt;!&ndash;                >&ndash;&gt;-->
+<!--                    &lt;!&ndash;图标&ndash;&gt;-->
+<!--                    <i class="glyphicon glyphicon-link"></i>-->
+<!--                    &lt;!&ndash;标题&ndash;&gt;-->
+<!--                    <span slot="name">{{navMenus.name}}</span>-->
+<!--&lt;!&ndash;                </el-menu-item>&ndash;&gt;-->
+<!--                &lt;!&ndash;有多级菜单&ndash;&gt;-->
+<!--                <el-submenu v-if="navMenus.children && navMenus.children.length">-->
+<!--                            <TreeMenu v-for="child in navMenus.children" :key="child.id"-->
+<!--                            :navMenus="child"/>-->
+
+<!--&lt;!&ndash;                    <template slot="name">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <i class="glyphicon glyphicon-link"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span> {{navMenu.name}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </template>&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;递归组件，把遍历的值传回子组件，完成递归调用&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <nav-menu :navMenus="navMenu.children"></nav-menu>&ndash;&gt;-->
+<!--                </el-submenu>-->
+<!--            </label>-->
+<!--        </div >-->
+<!--    </div>-->
+<!--</template>-->
+
+<!--<script>-->
+<!--    export default {-->
+<!--        name:"TreeMenu",-->
+<!--        props:{-->
+<!--            navMenus:Object,-->
+<!--        }-->
+
+<!--    }-->
+<!--</script>-->
+
+
+
