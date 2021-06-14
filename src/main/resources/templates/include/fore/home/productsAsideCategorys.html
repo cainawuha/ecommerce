@@ -11,13 +11,24 @@
 <!--</div>-->
 
 <div th:fragment="html">
-	<div  :cid="c.id" class="productsAsideCategorys" v-for="c in categories">
-		<div class="row show1" v-for="ps in c.productsByRow">
-			<a :href="'product?pid='+p.id" v-for="p in ps" v-if="p.subTitle.length!=0">
-				{{p.subTitle | subTitleFilter}}
-			</a>
-			<div class="seperator"></div>
-		</div>
-	</div>
+	<el-menu class="category-menu" mode="vertical" menu-trigger="hover" :unique-opened="true" active-text-color="#333">
+		<el-submenu index="0">
+			<template slot="title">
+				<div style="color: #fff;padding-left: 20px;height: 40px;line-height: 36px;width: 175px">商品分类</div>
+			</template>
+			<menu-item v-for="c in categories" :item="c" />
+		</el-submenu>
+	</el-menu>
+
+
+
+<!--	<div  :cid="c.id" class="productsAsideCategorys" v-for="c in categories">-->
+<!--		<div class="row show1" v-for="ps in c.productsByRow">-->
+<!--			<a :href="'product?pid='+p.id" v-for="p in ps" v-if="p.subTitle.length!=0">-->
+<!--				{{p.subTitle | subTitleFilter}}-->
+<!--			</a>-->
+<!--			<div class="seperator"></div>-->
+<!--		</div>-->
+<!--	</div>-->
 </div>
 

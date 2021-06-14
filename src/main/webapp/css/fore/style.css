@@ -2304,8 +2304,8 @@ input{
 	border-bottom: none !important;
 }
 
-.category-menu .el-menu.el-menu--horizontal {
-	border-bottom: none !important;
+.category-menu.el-menu {
+	border-right: none !important;
 }
 
 .category-menu .submenu__title {
@@ -2313,12 +2313,19 @@ input{
 }
 
 .category-menu .el-submenu__title {
-	height: 40px !important;
-	line-height: 48px !important;
-	color: #fff !important;
+	height: 36px !important;
+	line-height: 36px !important;
 }
 
 .category-menu .el-submenu__title:hover {
 	color: #030303 !important;
 }
 
+.category-menu .el-submenu__title:hover > div {
+	color: #030303 !important;
+}
+
+.el-submenu .el-menu-item {
+	height: 36px !important;
+	line-height: 36px !important;
+}
