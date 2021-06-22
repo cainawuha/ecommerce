@@ -48,6 +48,7 @@
             var left = $("div#carousel-of-product").offset().left;
             $("div.categoryMenu").css("left",left-20);
             $("div.categoryWithCarousel div.head").css("margin-left",left);
+            $("div#productsAsideCategorys").css("left",left);
             $("div.productsAsideCategorys").css("left",left-20);
 
             $("div.productsAsideCategorys div.row a").each(function(){
@@ -55,33 +56,49 @@
                 if(v == 1)
                     $(this).css("color","#87CEFA");
             });
+
+            $("#workingArea").click(function (e) {
+                if(!e.target.classList.value.includes('el')) {
+                    $(".el-aaa").trigger('click');
+                }
+            })
         }
 
         $(function(){
 
             Vue.component('menu-item', {
-                props: ['item'],
+                props: ['item', 'productsByRow'],
                 data() {
                     return {
                     }
                 },
                 mounted() {
-                    console.log(this);
                 },
                 template: `
                     <div>
                         <el-submenu v-if="item.children && item.children.length > 0" :index="item.id">
                           <template slot="title">{{item.name}}</template>
-                          <menu-item v-for="c in item.children" :item="c"></menu-item>
+                          <menu-item v-for="c in item.children" :item="c" :productsByRow="item.productsByRow"></menu-item>
                         </el-submenu>
-                        <el-menu-item v-if="!item.children || item.children.length === 0">{{item.name}}</el-menu-item>
+                        <el-menu-item v-if="!item.children || item.children.length === 0">
+                            <div class="el-bbb" v-if="!productsByRow || productsByRow.length === 0">{{item.name}}</div>
+                            <el-popover placement="right" width="824" trigger="hover" v-else>
+                              <div style="margin: 20px;">
+                                <div v-for="first in productsByRow">
+                                    <a :href="'product?pid='+second.id" v-for="second in first" style="margin-right: 20px">{{second.name}}</a>
+                                    <el-divider></el-divider>
+                                </div>
+                              </div>
+                              <div slot="reference">{{item.name}}</div>
+                            </el-popover>
+                        </el-menu-item>
                     </div>
                 `
             });
 
             var data4Vue = {
                 uri:'forehome',
-                categories: []
+                categories: [],
             };
 
             //ViewModel
