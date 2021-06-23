@@ -19,7 +19,7 @@
                         x_fp_hash:{},
                     }
                 },
-                data: data4Vue,
+                // data: data4Vue,
                 mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
                     this.load();
                     this.submitOrder();
@@ -43,7 +43,7 @@
                         axios.post(url,this.order).then((response)=> {
                             const result = response.data;
                             vue.total=result.data.total;
-                            const oid = result.data.oid;
+                            //const oid = result.data.oid;
                             vue.x_fp_sequence = result.data.x_fp_sequence;
                             vue.x_fp_timestamp = result.data.x_fp_timestamp;
                             vue.x_fp_hash = result.data.x_fp_hash;
@@ -175,13 +175,13 @@
         </div>
         <div class="submitOrderDiv" id="workingArea">
             <form action="https://rpm.demo.e-xact.com/payment" method="post">
-                <input name="x_login" value="WSP-ATLAN-1JR2jgA7vA" type="hidden">
-                <input name="x_amount" :value="total" type="hidden">
-                <input name="x_fp_sequence" :value="x_fp_sequence" type="hidden">
-                <input name="x_fp_timestamp" :value="x_fp_timestamp" type="hidden">
-                <input name="x_fp_hash" :value="x_fp_hash" type="hidden">
-                <input name="x_show_form" value="PAYMENT_FORM" type="hidden">
-                <input name="submit" type="submit" value="提交订单哈哈" class="submitOrderButton"/>
+                <input id="1" name="x_login" value="WSP-ATLAN-1JR2jgA7vA" type="hidden">
+                <input id="2" name="x_amount" :value="total" type="hidden">
+                <input id="3" name="x_fp_sequence" :value="x_fp_sequence" type="hidden">
+                <input id="4" name="x_fp_timestamp" :value="x_fp_timestamp" type="hidden">
+                <input id="5" name="x_fp_hash" :value="x_fp_hash" type="hidden">
+                <input id="6" name="x_show_form" value="PAYMENT_FORM" type="hidden">
+                <input id="7" name="submit" type="submit" value="提交订单哈哈" class="submitOrderButton"/>
             </form>
         </div>
     </div>
