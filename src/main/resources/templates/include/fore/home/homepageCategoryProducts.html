@@ -4,7 +4,7 @@
             <div class="categoryTitle" style="padding-left: 10px;border-left: 7px solid #19C8A9;">{{c.name}}</div>
             <br>
             <div v-for="child in c.children" style="display: inline-block">
-                <div class="categoryTitle" style="border-left: 7px solid rgb(25, 200, 169);padding-left: 10px;">{{child.name}}</div>
+                <div class="categoryTitle" style="border-left: 7px solid rgb(25, 200, 169);padding-left: 10px; margin-left: 7px">{{child.name}}</div>
                 <div class="productItem"  v-for="p,index in child.productsByRow[0]" v-if="index<5" >
                     <a :href="'product?pid='+p.id">
                         <img width="100px" :src="'img/productSingle_middle/'+p.firstProductImage.id+'.jpg'">
