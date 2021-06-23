@@ -2,18 +2,28 @@
     <script>
         $(function(){
             var oiid = getUrlParms("oiid");
-            var data4Vue = {
-                uri:'forebuy',
-                total:0,
-                orderItems:[],
-                order:{address:'',post:'',receiver:'',mobile:'',userMessage:''}
-            };
+            // var data4Vue = {
+            //
+            // };
             //ViewModel
             var vue = new Vue({
                 el: '#workingArea',
+                data(){
+                    return{
+                        uri:'forebuy',
+                        total:0,
+                        orderItems:[],
+                        order:{address:'',post:'',receiver:'',mobile:'',userMessage:''},
+                        x_fp_sequence: {},
+                        x_fp_timestamp:{},
+                        x_fp_hash:{},
+                    }
+                },
                 data: data4Vue,
                 mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
                     this.load();
+                    this.submitOrder();
+
                 },
                 methods: {
                     load:function(){
@@ -29,12 +39,15 @@
                         });
                     },
                     submitOrder:function(){
-                        var url =  "forecreateOrder";
-                        axios.post(url,this.order).then(function(response) {
-                            var result = response.data;
-                            var oid = result.data.oid;
-                            var total = result.data.total;
-                            location.href="alipay?oid="+oid+"&total="+total;
+                        const url = "forecreateOrder";
+                        axios.post(url,this.order).then((response)=> {
+                            const result = response.data;
+                            vue.total=result.data.total;
+                            const oid = result.data.oid;
+                            vue.x_fp_sequence = result.data.x_fp_sequence;
+                            vue.x_fp_timestamp = result.data.x_fp_timestamp;
+                            vue.x_fp_hash = result.data.x_fp_hash;
+                            //location.href="alipay?oid="+oid+"&total="+total;
                         });
                     }
                 }
@@ -160,8 +173,16 @@
                 <span class="orderItemTotalSumSpan">{{total|formatMoneyFilter}}</span>
             </div>
         </div>
-        <div class="submitOrderDiv">
-            <button type="submit" class="submitOrderButton" @click="submitOrder">提交订单</button>
+        <div class="submitOrderDiv" id="workingArea">
+            <form action="https://rpm.demo.e-xact.com/payment" method="post">
+                <input name="x_login" value="WSP-ATLAN-1JR2jgA7vA" type="hidden">
+                <input name="x_amount" :value="total" type="hidden">
+                <input name="x_fp_sequence" :value="x_fp_sequence" type="hidden">
+                <input name="x_fp_timestamp" :value="x_fp_timestamp" type="hidden">
+                <input name="x_fp_hash" :value="x_fp_hash" type="hidden">
+                <input name="x_show_form" value="PAYMENT_FORM" type="hidden">
+                <input name="submit" type="submit" value="提交订单哈哈" class="submitOrderButton"/>
+            </form>
         </div>
     </div>
 </div>

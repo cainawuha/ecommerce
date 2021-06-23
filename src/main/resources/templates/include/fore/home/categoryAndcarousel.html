@@ -3,8 +3,16 @@
 
     <div class="categoryWithCarousel">
         <div class="headbar show1">
-            <div class="head">
+            <div class="head ">
                 <span style="margin-left:10px" class="glyphicon glyphicon-th-list"></span>
+                <span style="margin-left:10px" >
+                    <el-menu class="category-menu" mode="horizontal" menu-trigger="hover" :unique-opened="true">
+                        <el-submenu index="0">
+                            <template slot="title">商品分类</template>
+                            <menu-item v-for="c in categories" :item="c" />
+                        </el-submenu>
+                    </el-menu>
+                </span>
             </div>
 
             <div class="rightMenu">
@@ -22,7 +30,7 @@
 <!--            <div th:replace="include/fore/home/categoryMenu::html" ></div>-->
 <!--        </div>-->
 
-        <div id="productsAsideCategorys" style="position: absolute;left: 0;top: 0;">
+        <div style="position: relative;left: 0;top: 0;">
             <div th:replace="include/fore/home/productsAsideCategorys::html" ></div>
         </div>
 
