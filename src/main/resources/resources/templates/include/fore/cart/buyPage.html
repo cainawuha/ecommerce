@@ -6,9 +6,9 @@
                 uri:'forebuy',
                 total:0,
                 orderItems:[],
-                order:{address:'',post:'',receiver:'',mobile:'',userMessage:''}
-                x_fp_sequence: {}
-                x_fp_timestamp:{}
+                order:{address:'',post:'',receiver:'',mobile:'',userMessage:''},
+                x_fp_sequence: {},
+                x_fp_timestamp:{},
                 x_fp_hash:{}
             };
             //ViewModel
@@ -42,7 +42,7 @@
                             vue.x_fp_sequence = result.data.x_fp_sequence;
                             vue.x_fp_timestamp = result.data.x_fp_timestamp;
                             vue.x_fp_hash = result.data.x_fp_hash;
-                            location.href="alipay?oid="+oid+"&total="+total;
+                            //location.href="alipay?oid="+oid+"&total="+total;
                         });
                     }
                 }
@@ -176,7 +176,7 @@
                 <input name="x_fp_timestamp" :value="x_fp_timestamp" type="hidden">
                 <input name="x_fp_hash" :value="x_fp_hash" type="hidden">
                 <input name="x_show_form" value="PAYMENT_FORM" type="hidden">
-                <input name="submit" type="submit" value="提交订单" class="submitOrderButton"/>
+                <input name="submit" type="submit" value="提交订单哈哈" class="submitOrderButton"/>
             </form>
         </div>
     </div>
