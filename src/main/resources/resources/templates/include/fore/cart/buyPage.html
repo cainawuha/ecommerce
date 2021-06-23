@@ -2,18 +2,23 @@
     <script>
         $(function(){
             var oiid = getUrlParms("oiid");
-            var data4Vue = {
-                uri:'forebuy',
-                total:0,
-                orderItems:[],
-                order:{address:'',post:'',receiver:'',mobile:'',userMessage:''},
-                x_fp_sequence: {},
-                x_fp_timestamp:{},
-                x_fp_hash:{}
-            };
+            // var data4Vue = {
+            //
+            // };
             //ViewModel
             var vue = new Vue({
                 el: '#workingArea',
+                data(){
+                    return{
+                        uri:'forebuy',
+                        total:0,
+                        orderItems:[],
+                        order:{address:'',post:'',receiver:'',mobile:'',userMessage:''},
+                        x_fp_sequence: {},
+                        x_fp_timestamp:{},
+                        x_fp_hash:{},
+                    }
+                },
                 data: data4Vue,
                 mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
                     this.load();
@@ -35,10 +40,10 @@
                     },
                     submitOrder:function(){
                         const url = "forecreateOrder";
-                        axios.post(url,this.order).then(function(response) {
-                            var result = response.data;
+                        axios.post(url,this.order).then((response)=> {
+                            const result = response.data;
                             vue.total=result.data.total;
-                            var oid = result.data.oid;
+                            const oid = result.data.oid;
                             vue.x_fp_sequence = result.data.x_fp_sequence;
                             vue.x_fp_timestamp = result.data.x_fp_timestamp;
                             vue.x_fp_hash = result.data.x_fp_hash;
