@@ -8,6 +8,7 @@ import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
+
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -16,6 +17,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
 public class ForeRESTController {
@@ -38,7 +40,7 @@ public class ForeRESTController {
 
     @GetMapping("/forehome")
     public Object home() {
-        List<Category> cs= categoryService.list();
+        CopyOnWriteArrayList<Category> cs= (CopyOnWriteArrayList<Category>) categoryService.list();
         productService.fill(cs);
         productService.fillByRow(cs);
         categoryService.removeCategoryFromProduct(cs);

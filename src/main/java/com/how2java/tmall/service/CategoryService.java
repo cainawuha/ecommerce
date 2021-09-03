@@ -10,8 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class CategoryService {
@@ -27,11 +28,12 @@ public class CategoryService {
 		return new Page4Navigator<>(pageFromJPA, navigatePages);
 	}
 
-	public List<Category> list() {
+	public CopyOnWriteArrayList<Category> list() {
 		Sort sort = new Sort(Sort.Direction.ASC, "id");
 		List<Category> categories = categoryDAO.findAll(sort);
 
-		List<Category> level1 = new ArrayList<>();
+
+		CopyOnWriteArrayList<Category> level1 = new CopyOnWriteArrayList<>();
 		// 找到所有的一级分类
 		for (Category entity : categories) {
 			if (entity.getParent_cid() == 0) {
@@ -39,7 +41,7 @@ public class CategoryService {
 			}
 		}
 		for (Category level1Menu : level1) {
-			level1Menu.setChildren(getChildrens(level1Menu, categories));
+			level1Menu.setChildren(getChildrens(level1Menu,  categories));
 		}
 		return level1;
 
@@ -53,8 +55,8 @@ public class CategoryService {
 	 * @param all  全部分类
 	 * @return 下一级分类
 	 */
-	private List<Category> getChildrens(Category root, List<Category> all) {
-		List<Category> children = new ArrayList<>();
+	private CopyOnWriteArrayList<Category> getChildrens(Category root, List<Category> all) {
+		CopyOnWriteArrayList<Category> children = new CopyOnWriteArrayList<>();
 		for (Category a : all) {
 			if (a.getParent_cid() == (root.getId())) {
 				children.add(a);
@@ -104,7 +106,7 @@ public class CategoryService {
 			}
 
 
-		List<List<Product>> productsByRow =category.getProductsByRow();
+		CopyOnWriteArrayList<CopyOnWriteArrayList<Product>> productsByRow =category.getProductsByRow();
 		if(null!=productsByRow) {
 			for (List<Product> ps : productsByRow) {
 				for (Product p: ps) {

@@ -2,8 +2,8 @@ package com.how2java.tmall.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Entity
 @Table(name = "category")
@@ -22,14 +22,14 @@ public class Category{
     String name;
 
     @Transient
-    List<Product> products;
+   List<Product> products;
     @Transient
-    List<List<Product>> productsByRow;
+    CopyOnWriteArrayList<CopyOnWriteArrayList<Product>> productsByRow;
 
 
 
     @Transient
-     List<Category> children = new ArrayList<>();
+    CopyOnWriteArrayList<Category> children = new CopyOnWriteArrayList<>();
 
     public int getId() {
         return id;
@@ -48,13 +48,14 @@ public class Category{
     }
     public void setProducts(List<Product> products) {
 
-        this.products = products;
+        this.products =  products;
     }
-    public List<List<Product>> getProductsByRow() {
+    public CopyOnWriteArrayList<CopyOnWriteArrayList<Product>> getProductsByRow() {
         return productsByRow;
     }
-    public void setProductsByRow(List<List<Product>> productsByRow) {
-        this.productsByRow = productsByRow;
+
+    public void setProductsByRow(CopyOnWriteArrayList<CopyOnWriteArrayList<Product>> productsByRow) {
+        this.productsByRow =  productsByRow;
     }
     public int getParent_cid() {
         return parent_cid;
@@ -63,12 +64,12 @@ public class Category{
     public void setParent_cid(int parent_cid) {
         this.parent_cid = parent_cid;
     }
-    public List<Category> getChildren() {
-        return children;
+    public CopyOnWriteArrayList<Category> getChildren() {
+        return (CopyOnWriteArrayList<Category>) children;
     }
 
     public void setChildren(List<Category> children) {
-        this.children = children;
+        this.children = (CopyOnWriteArrayList<Category>) children;
     }
     @Override
     public String toString() {

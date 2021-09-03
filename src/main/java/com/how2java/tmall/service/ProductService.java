@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class ProductService  {
@@ -53,7 +54,7 @@ public class ProductService  {
 		}
 	}
 	public void fill(Category category) {
-		List<Product> products = productDAO.findAll();
+		List<Product> products =  productDAO.findAll();
 category.setProducts(getProducts(category, products));
 
 		//List<Product> products = listByCategory(category);
@@ -62,7 +63,7 @@ category.setProducts(getProducts(category, products));
 
 	private List<Product> getProducts(Category root, List<Product> all) {
 		List<Product> product = new ArrayList<>();
-		List<Category> categorys =new ArrayList<>();
+		CopyOnWriteArrayList<Category> categorys =new CopyOnWriteArrayList<>();
 		for (Product a : all) {
 			if (a.getCategory().getName().equals(root.getName())) {
 				product.add(a);
@@ -81,25 +82,27 @@ category.setProducts(getProducts(category, products));
 
 	public void fillByRow(List<Category> categorys) {
 		int productNumberEachRow = 8;
-		 List<Product> products = new ArrayList<>();
+		CopyOnWriteArrayList<Product> products = new CopyOnWriteArrayList<>();
 
-		for (Category category : categorys) {//超市百货      //牛肉
-			if(!category.getChildren().isEmpty()) {//children非空
-				for (Category children : category.getChildren()) {//children是精选肉类，尝鲜水果。。
+		for (Category category : categorys) {//超市百货 ,建材家居
+			if(!category.getChildren().isEmpty()) {//children非空,
+				for (Category children : category.getChildren()) {//children是灰板水泥板          配件 手柄
+					products.clear();
 					if (children.getChildren().isEmpty()) {//children空
 						for (Product product1 : children.getProducts()) {
-							products.add(product1);
+							products.add(product1);//灰板水泥板所有产品
 						}
 					} else {
 						products= fillByRow2(children.getChildren());//递归处， 牛猪羊
 					}
 
-					List<List<Product>> productsByRow =  new ArrayList<>();
+					CopyOnWriteArrayList<CopyOnWriteArrayList<Product>> productsByRow =  new CopyOnWriteArrayList<>();
 					for (int i = 0; i < products.size(); i+=productNumberEachRow) {
 						int size = i+productNumberEachRow;
 						size= size>products.size()?products.size():size;
-						List<Product> productsOfEachRow =products.subList(i, size);
-						productsByRow.add(productsOfEachRow);
+					List<Product> productsOfEachRow =  products.subList(i, size);
+						CopyOnWriteArrayList cal	=new CopyOnWriteArrayList(productsOfEachRow);
+						productsByRow.add(cal);
 					}
 
 					children.setProductsByRow(productsByRow);
@@ -112,8 +115,8 @@ category.setProducts(getProducts(category, products));
 		}
 	}
 
-	public List<Product> fillByRow2(List<Category> categorys) {
-		List<Product> products2 = new ArrayList<>();
+	public CopyOnWriteArrayList<Product> fillByRow2(CopyOnWriteArrayList<Category> categorys) {
+		CopyOnWriteArrayList<Product> products2 = new CopyOnWriteArrayList<>();
 		for (Category category : categorys) {   //牛肉
 				for (Product product2 : category.getProducts()) {
 					products2.add(product2);

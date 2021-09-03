@@ -8,10 +8,12 @@ import com.how2java.tmall.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class OtherInterceptor implements HandlerInterceptor {
     @Autowired
@@ -35,7 +37,7 @@ public class OtherInterceptor implements HandlerInterceptor {
 
         }
 
-        List<Category> cs =categoryService.list();
+        CopyOnWriteArrayList<Category> cs = categoryService.list();
         String contextPath=httpServletRequest.getServletContext().getContextPath();
 
         httpServletRequest.getServletContext().setAttribute("categories_below_search", cs);
