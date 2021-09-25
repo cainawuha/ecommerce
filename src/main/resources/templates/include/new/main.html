@@ -1,3 +1,29 @@
 <div th:fragment="html">
-  main
+  <el-carousel height="430px" style="background: #6C6C6C">
+    <el-carousel-item v-for="item in 4" :key="item">
+      <h3 class="small">{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+  <div class="main">
+    <div class="wrapper">
+      <div class="header">Shop by Department</div>
+      <div class="item-container">
+        <div class="dept-item" v-for="item in 18" :key="item">
+          <img src="" alt="png">
+          <div>Drywall</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="header">Best Sale</div>
+      <div class="item-container">
+        <div class="best-item" v-for="item in 10" :key="item">
+          <img src="" alt="png">
+          <div>Desc</div>
+          <div>$12.99</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="download-img"></div>
 </div>

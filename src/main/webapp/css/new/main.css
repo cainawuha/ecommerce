@@ -1,0 +1,37 @@
+.main {
+    margin: 0 60px;
+}
+
+.main .wrapper {
+    margin: 40px 0;
+}
+
+.main .wrapper .header {
+
+}
+
+.main .wrapper .item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: stretch;
+}
+
+.main .wrapper .item-container .dept-item {
+    width: 205px;
+    height: 162px;
+    background: #6e6e6e;
+    margin-bottom: 18px;
+}
+
+.main .wrapper .item-container .best-item {
+    width: 245px;
+    height: 354px;
+    background: #6e6e6e;
+    margin-bottom: 18px;
+}
+
+.download-img {
+    height: 400px;
+    background: #6e6e6e;
+}

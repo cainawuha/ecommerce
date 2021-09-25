@@ -1,3 +1,19 @@
-<div th:fragment="html">
-  navbar
+<div th:fragment="html" class="navbar-container">
+  <div class="first-img">
+    <img src="img/new/logo.png" alt="logo">
+  </div>
+  <div class="second-img">
+    <img src="img/new/options-lines.png" alt="options">
+  </div>
+  <div class="navbar-link">
+    <div>Departments</div>
+    <div>Deals</div>
+    <div>About Us</div>
+    <div>Be our partner</div>
+  </div>
+  <div class="navbar-search">
+    <el-input placeholder="Search ..." v-model="searchVal">
+      <el-button slot="append" icon="el-icon-search" class="search-btn"></el-button>
+    </el-input>
+  </div>
 </div>

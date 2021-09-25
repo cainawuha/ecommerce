@@ -3,6 +3,26 @@
 <head th:include="include/new/head::html"></head>
 <body>
 <div id="workingArea">
+    <script>
+        $(function(){
+            var vue = new Vue({
+                el: '#workingArea',
+                data: {
+                    searchVal: '',
+                    uri:'forehome',
+                    categories: [],
+                },
+                mounted:function(){
+
+                },
+                methods: {
+
+                },
+            });
+
+        });
+    </script>
+
     <div th:replace="include/new/header::html" ></div>
     <div th:replace="include/new/navbar::html" ></div>
     <div th:replace="include/new/main::html" ></div>
